@@ -12,8 +12,10 @@ export default function AuthProvider({children}){
     function login (username, password){
         if( username === 'soumya' && password === 'soumya'){
             setAuthentication(true)
+            setUsername(username)
             return true
         }else {
+            setUsername(null)
             return false
         }
     }
@@ -22,8 +24,9 @@ export default function AuthProvider({children}){
         setAuthentication(false)
     }
     const [isAuthenticated, setAuthentication] = useState(false)
+    const [username, setUsername] = useState(null)
     return (
-        <AuthContext.Provider value = {{isAuthenticated, login, logout}}>
+        <AuthContext.Provider value = {{isAuthenticated, login, logout, username}}>
             {children}
         </AuthContext.Provider>
     )
